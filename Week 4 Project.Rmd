@@ -1,0 +1,58 @@
+
+---
+title: "Developing Data Products: Week 4 Assignment"
+subtitle: "Calorie Expenditure Calculator"
+author: "Jeremy Sidwell"
+date: "6/16/2019"
+output: 
+  slidy_presentation:
+    self_contained: false
+
+---
+## Overview
+
+The calorie expenditure web application estimates total calories burned during a workout.  The predictive model used to estimate Calories is sourced from the March 2005 publication of the Journal of Sports Sciences, ***[Prediction of energy expenditure from heart rate monitoring during submaximal exercise](https://pdfs.semanticscholar.org/2f64/7f62e650bf7df32546e541af3cf155297749.pdf)***.  
+
+The calorie calculator provides the user a reasonable estimate for calories burned during exercise to support the user's weight and nutrition management goals. 
+
+Source code for the web application can be found at the following link: 
+
+***Note: **This web application has been created and submitted as the Week 4 course project for the Coursera.org online course, Developing Data Products.*
+
+## Calorie Expenditure Web Application Model Inputs
+
+* **Gender** (List Input, Male or Female, default is Female)
+* **Age** (Years, Numeric Input, >=15 year old, default is 31)
+* **Weight** (Pounds, Numeric Input, >= 50 pounds, default is 137)
+* **Time** (Minutes, Numeric Input, >= 15 minutes, default is 60)
+* **Heart Rate** (Average beats per minute, Slider Input between 80 and 220, default is 160)
+* **Fitness Level **(VO2 Max <optional entry>, Numeric Input between 0 and 100, default is 48)
+
+***Note: **The fitness level allows the user to enter their estimated VO2 Max level if the user chooses to include the Fitness Level in the calculation.*
+
+## Calorie Expenditure Web Application Model Output
+The reactive output provides the estimated Calories burned based on user input and the formula derived in the Journal of Sports Sciences, which is executed in the application server.  Example below:
+
+```{r pressure, echo=FALSE, out.width = '100%',out.height='50%'}
+knitr::include_graphics("~/Documents/DataScience/Course 9/Week 4/CalorieCalculator/CalorieCalculatorExample.png")
+```
+
+## Calorie Formula
+<font size = "6">
+***Fitness Calorie Formula =***
+
+<font size = "3">
+**Female:**$$\frac{Time *(Age * 0.2735 + \frac{Weight}{2.20462}*0.1032 + Heart Rate * 0.4498+ VO2*0.3802 - 59.3954)}{4.184}$$
+<font size = "3">
+**Male:** $$\frac{Time *(Age * 0.2713 + \frac{Weight}{2.20462}*0.3942 + Heart Rate * 0.6344+ VO2*0.4044 - 95.7735)}{4.184}$$
+
+<font size = "6">
+***Non-Fitness Calorie Formula =***
+
+<font size = "3">
+**Female:**$$\frac{Time *(Age*0.0740 - \frac{Weight}{2.20462}*0.1263 + Heart Rate * 0.4472 - 20.4022)}{4.184}$$
+<font size = "3">
+**Male:**$$\frac{Time *(Age*0.2017 + \frac{Weight}{2.20462}*0.1988 + Heart Rate * 0.6309 - 55.0969)}{4.184}$$
+
+<font size = "3">
+***NOTE: **Details on the development of the above equations can be found in the Journal of Sports Sciences research paper referenced on slide 2.*
